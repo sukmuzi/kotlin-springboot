@@ -1,5 +1,8 @@
 package com.example.mvc.controller.model.http
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import javax.validation.constraints.AssertTrue
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
@@ -23,7 +26,17 @@ data class UserRequest(
     var address: String? = null,
 
     @field:Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}\$") // 정규식 검증
-    var phoneNumber: String? = null
-) {
+    var phoneNumber: String? = null,
 
+    var createdAt: String? = null // yyyy-MM-dd HH:mm:ss  ex) 2022-06-09 18:00:00
+) {
+    @AssertTrue(message = "생성일자의 패턴은 yyyy-MM-dd HH:mm:ss 여야 합니다.")
+    private fun isValidCreatedAt(): Boolean {
+        return try {
+            LocalDateTime.parse(this.createdAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
 }
