@@ -13,7 +13,7 @@ import javax.validation.constraints.Size
 
 data class UserRequest(
 
-    // @NotNull : null만 불가 "", " " 허용
+    // @NotNull  : null 불가 "", " " 허용
     // @NotEmpty : null, "" 불가
     // @NotBlank : null, "", " " 불가
 
