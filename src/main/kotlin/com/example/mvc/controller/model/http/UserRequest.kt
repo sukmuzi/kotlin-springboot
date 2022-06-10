@@ -13,6 +13,10 @@ import javax.validation.constraints.Size
 
 data class UserRequest(
 
+    // @NotNull : null만 불가 "", " " 허용
+    // @NotEmpty : null, "" 불가
+    // @NotBlank : null, "", " " 불가
+
     @field:NotEmpty
     @field:Size(min = 2, max = 8)
     var name: String? = null,
@@ -23,7 +27,7 @@ data class UserRequest(
     @field:Email // email 양식 검증
     var email: String? = null,
 
-    @field:NotBlank //공백 검증
+    @field:NotBlank
     var address: String? = null,
 
     @field:Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}\$") // 정규식 검증
